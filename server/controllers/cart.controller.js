@@ -7,7 +7,7 @@ import ErrorResponse from "../utils/errorResponse.js"
 // @route   GET /api/cart
 // @access  Private
 export const getCart = asyncHandler(async (req, res, next) => {
-  let cart = await Cart.findOne({ user: req.user.id }).populate({
+  let cart = await Cart.findOne({ user: req.user._id }).populate({
     path: "items.product",
     select: "name price images stock packageSizes",
   })
@@ -15,7 +15,7 @@ export const getCart = asyncHandler(async (req, res, next) => {
   if (!cart) {
     // Create cart if it doesn't exist
     cart = await Cart.create({
-      user: req.user.id,
+      user: req.user._id,
       items: [],
     })
   }
@@ -85,10 +85,10 @@ export const addToCart = asyncHandler(async (req, res, next) => {
   }
 
   // Find user's cart or create new one
-  let cart = await Cart.findOne({ user: req.user.id })
+  let cart = await Cart.findOne({ user: req.user._id })
   if (!cart) {
     cart = await Cart.create({
-      user: req.user.id,
+      user: req.user._id,
       items: [],
     })
   }
@@ -134,7 +134,7 @@ export const updateCartItem = asyncHandler(async (req, res, next) => {
   }
 
   // Find user's cart
-  const cart = await Cart.findOne({ user: req.user.id })
+  const cart = await Cart.findOne({ user: req.user._id })
   if (!cart) {
     return next(new ErrorResponse("Cart not found", 404))
   }
@@ -185,7 +185,7 @@ export const removeFromCart = asyncHandler(async (req, res, next) => {
   const { packageSize } = req.query
 
   // Find user's cart
-  const cart = await Cart.findOne({ user: req.user.id })
+  const cart = await Cart.findOne({ user: req.user._id })
   if (!cart) {
     return next(new ErrorResponse("Cart not found", 404))
   }
@@ -213,7 +213,7 @@ export const removeFromCart = asyncHandler(async (req, res, next) => {
 // @access  Private
 export const clearCart = asyncHandler(async (req, res, next) => {
   // Find user's cart
-  const cart = await Cart.findOne({ user: req.user.id })
+  const cart = await Cart.findOne({ user: req.user._id })
   if (!cart) {
     return next(new ErrorResponse("Cart not found", 404))
   }

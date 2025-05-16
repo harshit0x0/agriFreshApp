@@ -33,7 +33,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
 
   // Create order
   const order = await Order.create({
-    user: req.user.id,
+    user: req.user._id,
     items,
     shippingAddress,
     paymentMethod,
@@ -44,7 +44,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
   })
 
   // Clear user's cart after successful order
-  await Cart.findOneAndUpdate({ user: req.user.id }, { items: [] })
+  await Cart.findOneAndUpdate({ user: req.user._id }, { items: [] })
 
   res.status(201).json({
     success: true,
@@ -63,7 +63,7 @@ export const getOrderById = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is order owner or admin
-  if (order.user._id.toString() !== req.user.id && req.user.role !== "admin") {
+  if (order.user._id.toString() !== req.user._id.toString() && req.user.role !== "admin") {
     return next(new ErrorResponse("Not authorized to access this order", 403))
   }
 
@@ -143,7 +143,7 @@ export const updateOrderStatus = asyncHandler(async (req, res, next) => {
 // @route   GET /api/orders/myorders
 // @access  Private
 export const getMyOrders = asyncHandler(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user.id }).sort("-createdAt")
+  const orders = await Order.find({ user: req.user._id }).sort("-createdAt")
 
   res.status(200).json({
     success: true,

@@ -112,7 +112,7 @@ export const updateAddress = asyncHandler(async (req, res, next) => {
   const { street, city, state, pincode } = req.body
 
   const user = await User.findByIdAndUpdate(
-    req.user.id,
+    req.user._id,
     {
       address: {
         street,

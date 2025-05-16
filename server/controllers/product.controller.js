@@ -102,7 +102,7 @@ export const getProduct = asyncHandler(async (req, res, next) => {
 // @access  Private (Seller/Admin)
 export const createProduct = asyncHandler(async (req, res, next) => {
   // Add user to req.body
-  req.body.seller = req.user.id
+  req.body.seller = req.user._id
 
   // Check if user is seller or admin
   if (req.user.role !== "seller" && req.user.role !== "admin") {
@@ -128,7 +128,7 @@ export const updateProduct = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is product owner or admin
-  if (product.seller.toString() !== req.user.id && req.user.role !== "admin") {
+  if (product.seller.toString() !== req.user._id.toString() && req.user.role !== "admin") {
     return next(new ErrorResponse(`User ${req.user.id} is not authorized to update this product`, 403))
   }
 
@@ -154,7 +154,7 @@ export const deleteProduct = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is product owner or admin
-  if (product.seller.toString() !== req.user.id && req.user.role !== "admin") {
+  if (product.seller.toString() !== req.user._id.toString() && req.user.role !== "admin") {
     return next(new ErrorResponse(`User ${req.user.id} is not authorized to delete this product`, 403))
   }
 
@@ -179,14 +179,14 @@ export const createProductReview = asyncHandler(async (req, res, next) => {
   }
 
   // Check if user already reviewed
-  const alreadyReviewed = product.reviews.find((r) => r.user.toString() === req.user.id.toString())
+  const alreadyReviewed = product.reviews.find((r) => r.user.toString() === req.user._id.toString())
 
   if (alreadyReviewed) {
     return next(new ErrorResponse("Product already reviewed", 400))
   }
 
   const review = {
-    user: req.user.id,
+    user: req.user._id,
     name: req.user.name,
     rating: Number(rating),
     comment,
