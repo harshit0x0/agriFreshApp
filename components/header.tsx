@@ -74,9 +74,9 @@ export default function Header(): JSX.Element {
               <Link href="/sell" className="text-lg font-medium">
                 Sell
               </Link>
-              <Link href="/services" className="text-lg font-medium">
+              {/* <Link href="/services" className="text-lg font-medium">
                 Services
-              </Link>
+              </Link> */}
               <Link href="/about" className="text-lg font-medium">
                 About Us
               </Link>
@@ -142,7 +142,7 @@ export default function Header(): JSX.Element {
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>Sell</NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <NavigationMenuTrigger>Services</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 w-[200px]">
@@ -178,7 +178,7 @@ export default function Header(): JSX.Element {
                   </li>
                 </ul>
               </NavigationMenuContent>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
             <NavigationMenuItem>
               <Link href="/about" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>About Us</NavigationMenuLink>

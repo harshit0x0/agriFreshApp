@@ -36,7 +36,7 @@ export default function Home() {
             </div>
             <div className="flex justify-center">
               <Image
-                src="/placeholder.svg?height=550&width=550"
+                src="/hero.jpg?height=550&width=550"
                 width={550}
                 height={550}
                 alt="Farm fresh produce"
@@ -184,7 +184,7 @@ export default function Home() {
                       alt={testimonial.name}
                       width={50}
                       height={50}
-                      className="rounded-full"
+                      className="object-cover rounded-full"
                     />
                     <div>
                       <CardTitle className="text-lg">{testimonial.name}</CardTitle>
@@ -220,7 +220,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-green-800">
+                <Button size="lg" variant="outline" className="border-white text-green-700 hover:bg-green-800">
                   Contact Us
                 </Button>
               </Link>
@@ -236,42 +236,42 @@ const categories = [
   {
     name: "Seeds & Plants",
     slug: "seeds-plants",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/seeds_and_plants.jpg?height=200&width=200",
   },
   {
     name: "Fertilizers",
     slug: "fertilizers",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/fertilizers.jpg?height=200&width=200",
   },
   {
     name: "Pesticides",
     slug: "pesticides",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/pesticides.jpg?height=200&width=200",
   },
   {
     name: "Farm Equipment",
     slug: "farm-equipment",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/farm_equipments.jpg?height=200&width=200",
   },
   {
     name: "Irrigation",
     slug: "irrigation",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/irrigation.jpg?height=200&width=200",
   },
   {
     name: "Fruits & Vegetables",
     slug: "fruits-vegetables",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/fruit_vegetable.jpg?height=200&width=200",
   },
   {
     name: "Dairy Products",
     slug: "dairy",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/dairy_products.jpg?height=200&width=200",
   },
   {
     name: "Grains & Pulses",
     slug: "grains-pulses",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/grains_pulses.jpg?height=200&width=200",
   },
 ]
 
@@ -279,21 +279,21 @@ const testimonials = [
   {
     name: "Rajesh Kumar",
     role: "Wheat Farmer, Punjab",
-    avatar: "/placeholder.svg?height=50&width=50",
+    avatar: "/testimonial/rajesh.jpg?height=50&width=50",
     quote:
       "AgriFresh helped me sell my wheat harvest directly to processors, increasing my profit by 30% compared to traditional markets.",
   },
   {
     name: "Anita Sharma",
     role: "Vegetable Grower, Maharashtra",
-    avatar: "/placeholder.svg?height=50&width=50",
+    avatar: "/testimonial/anita.jpg?height=50&width=50",
     quote:
       "I can now source quality seeds and fertilizers at better prices, and sell my vegetables to urban customers who pay premium rates.",
   },
   {
     name: "Vijay Reddy",
     role: "Agricultural Supplier, Telangana",
-    avatar: "/placeholder.svg?height=50&width=50",
+    avatar: "/testimonial/vijay.jpg?height=50&width=50",
     quote:
       "This platform has expanded my customer base beyond my local area. The inventory management system makes tracking stock effortless.",
   },
