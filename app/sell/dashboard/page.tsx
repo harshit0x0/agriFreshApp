@@ -18,6 +18,8 @@ import { Badge } from "@/components/ui/badge"
 import { BarChart3, Package, ShoppingCart, Users, MoreHorizontal, Edit, Trash2, Eye, Plus } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
 import type { Product } from "@/types"
+import { getSellerProducts } from "@/lib/products"
+import { toast } from "@/components/ui/use-toast"
 
 export default function SellerDashboard(): JSX.Element {
   const { user } = useAuth()
@@ -26,44 +28,18 @@ export default function SellerDashboard(): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    // Simulate fetching data
+    // Fetch data
     const fetchData = async (): Promise<void> => {
       setIsLoading(true)
       try {
+        // Fetch products
+        const productsResponse = await getSellerProducts()
+        if (productsResponse.success) {
+          setProducts(productsResponse.data)
+        }
+
+        // For orders, we'll still use mock data for now
         // In a real app, you would fetch from your API
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-
-        // Mock data
-        setProducts([
-          {
-            _id: "1",
-            name: "Organic Basmati Rice",
-            price: 180,
-            stock: 100,
-            category: { _id: "1", name: "Grains & Pulses" } as any,
-            createdAt: new Date("2023-01-15").toISOString(),
-            isActive: true,
-          } as Product,
-          {
-            _id: "2",
-            name: "Premium Wheat Seeds",
-            price: 1200,
-            stock: 50,
-            category: { _id: "2", name: "Seeds & Plants" } as any,
-            createdAt: new Date("2023-02-10").toISOString(),
-            isActive: true,
-          } as Product,
-          {
-            _id: "3",
-            name: "Organic Fertilizer",
-            price: 850,
-            stock: 75,
-            category: { _id: "3", name: "Fertilizers" } as any,
-            createdAt: new Date("2023-03-05").toISOString(),
-            isActive: true,
-          } as Product,
-        ])
-
         setOrders([
           {
             id: "ORD123456",
@@ -92,6 +68,11 @@ export default function SellerDashboard(): JSX.Element {
         ])
       } catch (error) {
         console.error("Error fetching data:", error)
+        toast({
+          title: "Error",
+          description: "Failed to load dashboard data",
+          variant: "destructive",
+        })
       } finally {
         setIsLoading(false)
       }

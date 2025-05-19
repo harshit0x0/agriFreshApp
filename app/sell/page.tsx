@@ -16,11 +16,11 @@ export default function SellPage(): JSX.Element {
           Connect directly with buyers and grow your agricultural business with our trusted platform
         </p>
         <div className="mt-8 flex justify-center gap-4">
-          <Link href= {isAuthenticated ?"/sell/dashboard" :  "/sell/register" } >
+          <Link href={isAuthenticated ? "/sell/dashboard" : "/sell/register"}>
             <Button size="lg" className="bg-green-700 hover:bg-green-800">
               Start Selling
             </Button>
-          </Link>  
+          </Link>
         </div>
       </div>
 

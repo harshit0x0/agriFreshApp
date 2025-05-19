@@ -16,6 +16,7 @@ import { Trash2, Plus, Upload } from "lucide-react"
 import { getCategories } from "@/lib/categories"
 import { useEffect } from "react"
 import type { Category } from "@/types"
+import { createProduct } from "@/lib/products"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -109,7 +110,7 @@ export default function AddProduct(): JSX.Element {
     setIsSubmitting(true)
 
     try {
-      // Here you would normally call your API to add the product
+      // Prepare product data
       const productData = {
         ...values,
         price: Number.parseFloat(values.price),
@@ -122,21 +123,24 @@ export default function AddProduct(): JSX.Element {
         })),
       }
 
-      console.log(productData)
+      // Call API to create product
+      const response = await createProduct(productData)
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      if (response.success) {
+        toast({
+          title: "Product Added",
+          description: "Your product has been added successfully.",
+        })
 
-      toast({
-        title: "Product Added",
-        description: "Your product has been added successfully.",
-      })
-
-      router.push("/sell/dashboard")
-    } catch (error) {
+        router.push("/sell/dashboard")
+      } else {
+        throw new Error(response.error || "Failed to add product")
+      }
+    } catch (error: any) {
+      console.error("Error adding product:", error)
       toast({
         title: "Failed to Add Product",
-        description: "There was an error adding your product. Please try again.",
+        description: error.message || "There was an error adding your product. Please try again.",
         variant: "destructive",
       })
     } finally {

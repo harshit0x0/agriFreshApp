@@ -24,15 +24,14 @@ export default function AboutPage(): JSX.Element {
             consumers, eliminating middlemen and ensuring fair prices for both parties.
           </p>
           <p className="text-gray-600 mb-4">
-            This project has been made by Harshit Pandey, Monal Ghansela and Siddhart Verma from Information technology Department of GBPUAT Pantnagar.
+            This project has been made by Harshit Pandey, Monal Ghansela and Siddhart Verma from Information technology
+            Department of GBPUAT Pantnagar.
           </p>
           <p className="text-gray-600">
-            AgriFresh wants to become: 
-            A platform which provides a direct marketplace where:
-          - Farmers can list their products, set their own prices, and reach a wider customer base
-          - Consumers can purchase fresh produce directly from the source
-          - The platform handles logistics, payments, and customer service
-          - Both parties benefit from a transparent, efficient system
+            AgriFresh wants to become: A platform which provides a direct marketplace where: - Farmers can list their
+            products, set their own prices, and reach a wider customer base - Consumers can purchase fresh produce
+            directly from the source - The platform handles logistics, payments, and customer service - Both parties
+            benefit from a transparent, efficient system
           </p>
         </div>
         <div className="relative h-80 rounded-lg overflow-hidden">

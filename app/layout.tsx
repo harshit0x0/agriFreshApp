@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "AgriFresh - Agriculture E-commerce Platform",
   description: "Buy and sell agricultural products, equipment, and services online",
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({ children }) {

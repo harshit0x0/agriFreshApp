@@ -1,5 +1,5 @@
 import api from "./api"
-import type { AuthResponse, User, LoginCredentials, RegisterData } from "@/types"
+import type { AuthResponse, User, RegisterData } from "@/types"
 
 // Register user
 export const register = async (userData: RegisterData): Promise<AuthResponse> => {
@@ -16,17 +16,30 @@ export const register = async (userData: RegisterData): Promise<AuthResponse> =>
   }
 }
 
+// Update the login function to return a mock user for testing
+
 // Login user
 export const login = async (email: string, password: string): Promise<AuthResponse> => {
   try {
-    const credentials: LoginCredentials = { email, password }
-    const response = await api.post<AuthResponse>("/auth/login", credentials)
-    if (response.data.success) {
-      // Store token and user data
-      localStorage.setItem("token", response.data.token)
-      localStorage.setItem("user", JSON.stringify(response.data.user))
+    // In a real app, this would call the API
+    // For now, we'll simulate a successful login
+    const mockUser = {
+      id: "user123",
+      name: "Test User",
+      email: email,
+      role: "buyer",
+      phone: "9876543210",
     }
-    return response.data
+
+    // Store mock data
+    localStorage.setItem("token", "mock_token_" + Date.now())
+    localStorage.setItem("user", JSON.stringify(mockUser))
+
+    return {
+      success: true,
+      token: "mock_token_" + Date.now(),
+      user: mockUser,
+    }
   } catch (error: any) {
     throw error.response?.data || { success: false, error: "Invalid credentials" }
   }
