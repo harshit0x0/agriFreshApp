@@ -20,22 +20,23 @@ export default function AboutPage(): JSX.Element {
         <div>
           <h2 className="text-3xl font-bold mb-6">Our Story</h2>
           <p className="text-gray-600 mb-4">
-            AgriFresh was founded in 2022 with a simple mission: to create a direct connection between farmers and
+            AgriFresh was founded in 2025 with a simple mission: to create a direct connection between farmers and
             consumers, eliminating middlemen and ensuring fair prices for both parties.
           </p>
           <p className="text-gray-600 mb-4">
-            Our founder, Rajesh Kumar, a third-generation farmer from Punjab, experienced firsthand the challenges faced
-            by farmers in getting fair prices for their produce. This inspired him to create a platform that would
-            revolutionize the agricultural supply chain.
+            This project has been made by Harshit Pandey, Monal Ghansela and Siddhart Verma from Information technology Department of GBPUAT Pantnagar.
           </p>
           <p className="text-gray-600">
-            Today, AgriFresh has grown into a comprehensive agricultural marketplace serving thousands of farmers and
-            consumers across India, while staying true to our core values of sustainability, transparency, and
-            empowerment.
+            AgriFresh wants to become: 
+            A platform which provides a direct marketplace where:
+          - Farmers can list their products, set their own prices, and reach a wider customer base
+          - Consumers can purchase fresh produce directly from the source
+          - The platform handles logistics, payments, and customer service
+          - Both parties benefit from a transparent, efficient system
           </p>
         </div>
         <div className="relative h-80 rounded-lg overflow-hidden">
-          <Image src="/placeholder.svg" alt="Farmers in a field" fill className="object-cover" />
+          <Image src="/hero.jpg" alt="Farmers in a field" fill className="object-cover" />
         </div>
       </div>
 
@@ -92,7 +93,7 @@ export default function AboutPage(): JSX.Element {
       </div>
 
       {/* Our Impact Section */}
-      <div className="mb-20">
+      {/* <div className="mb-20">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-4">Our Impact</h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
@@ -118,7 +119,7 @@ export default function AboutPage(): JSX.Element {
             <p className="text-gray-600">States Covered</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Our Team Section */}
       <div className="mb-20">
@@ -134,13 +135,12 @@ export default function AboutPage(): JSX.Element {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
-                  <Image src="/placeholder.svg" alt="Rajesh Kumar" fill className="object-cover" />
+                  <Image src="/monal.jpg" alt="Monal Ghansela" fill className="object-cover" />
                 </div>
-                <h3 className="text-xl font-bold mb-1">Rajesh Kumar</h3>
-                <p className="text-gray-500 mb-4">Founder & CEO</p>
-                <p className="text-gray-600 text-sm">
+                <h3 className="text-xl font-bold mb-1">Monal Ghansela</h3>
+                {/* <p className="text-gray-600 text-sm">
                   A third-generation farmer with a vision to transform agriculture through technology.
-                </p>
+                </p> */}
               </div>
             </CardContent>
           </Card>
@@ -149,13 +149,12 @@ export default function AboutPage(): JSX.Element {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
-                  <Image src="/placeholder.svg" alt="Priya Sharma" fill className="object-cover" />
+                  <Image src="/harshit.jpg" alt="Harshit Pandey" fill className="object-cover" />
                 </div>
-                <h3 className="text-xl font-bold mb-1">Priya Sharma</h3>
-                <p className="text-gray-500 mb-4">COO</p>
-                <p className="text-gray-600 text-sm">
+                <h3 className="text-xl font-bold mb-1">Harshit Pandey</h3>
+                {/* <p className="text-gray-600 text-sm">
                   An agricultural economist with expertise in supply chain management and rural development.
-                </p>
+                </p> */}
               </div>
             </CardContent>
           </Card>
@@ -164,13 +163,12 @@ export default function AboutPage(): JSX.Element {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
-                  <Image src="/placeholder.svg" alt="Vikram Singh" fill className="object-cover" />
+                  <Image src="/siddharth.jpg" alt="Vikram Singh" fill className="object-cover" />
                 </div>
-                <h3 className="text-xl font-bold mb-1">Vikram Singh</h3>
-                <p className="text-gray-500 mb-4">CTO</p>
-                <p className="text-gray-600 text-sm">
+                <h3 className="text-xl font-bold mb-1">Siddhart Verma</h3>
+                {/* <p className="text-gray-600 text-sm">
                   A tech enthusiast with a background in agricultural engineering and software development.
-                </p>
+                </p> */}
               </div>
             </CardContent>
           </Card>

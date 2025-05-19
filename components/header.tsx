@@ -223,20 +223,20 @@ export default function Header(): JSX.Element {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
+                {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+                {/* <DropdownMenuSeparator /> */}
+                {/* <DropdownMenuItem asChild>
                   <Link href="/dashboard">Dashboard</Link>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem asChild>
                   <Link href="/dashboard/orders">My Orders</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
+                {/* <DropdownMenuItem asChild>
                   <Link href="/dashboard/listings">My Listings</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/dashboard/profile">Profile Settings</Link>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
               </DropdownMenuContent>

@@ -1,9 +1,13 @@
+"use client"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { TrendingUp, Users, ShieldCheck } from "lucide-react"
+import { useAuth } from "@/context/AuthContext"
 
 export default function SellPage(): JSX.Element {
+  const { user, isAuthenticated, logout } = useAuth()
+
   return (
     <div className="container mx-auto py-12 px-4">
       <div className="text-center mb-16">
@@ -12,16 +16,11 @@ export default function SellPage(): JSX.Element {
           Connect directly with buyers and grow your agricultural business with our trusted platform
         </p>
         <div className="mt-8 flex justify-center gap-4">
-          <Link href="/sell/register">
+          <Link href= {isAuthenticated ?"/sell/dashboard" :  "/sell/register" } >
             <Button size="lg" className="bg-green-700 hover:bg-green-800">
               Start Selling
             </Button>
-          </Link>
-          <Link href="/sell/learn-more">
-            <Button size="lg" variant="outline">
-              Learn More
-            </Button>
-          </Link>
+          </Link>  
         </div>
       </div>
 
@@ -194,11 +193,11 @@ export default function SellPage(): JSX.Element {
               Start Selling Today
             </Button>
           </Link>
-          <Link href="/contact">
+          {/* <Link href="/contact">
             <Button size="lg" variant="outline">
               Contact Sales Team
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
