@@ -56,11 +56,16 @@ export default function AddProduct(): JSX.Element {
         }
       } catch (error) {
         console.error("Failed to fetch categories:", error)
+        toast({
+          title: "Error",
+          description: "Failed to fetch categories. Please try again.",
+          variant: "destructive",
+        })
       }
     }
 
     fetchCategories()
-  }, [])
+  }, [toast])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -110,21 +115,35 @@ export default function AddProduct(): JSX.Element {
     setIsSubmitting(true)
 
     try {
+      // Filter out incomplete specifications
+      const validSpecifications = specifications.filter((spec) => spec.name.trim() !== "" && spec.value.trim() !== "")
+
+      // Filter out incomplete package sizes
+      const validPackageSizes = packageSizes.filter(
+        (pkg) => pkg.size.trim() !== "" && pkg.price.trim() !== "" && pkg.stock.trim() !== "",
+      )
+
       // Prepare product data
       const productData = {
         ...values,
         price: Number.parseFloat(values.price),
         stock: Number.parseInt(values.stock),
-        specifications,
-        packageSizes: packageSizes.map((pkg) => ({
+        specifications: validSpecifications,
+        packageSizes: validPackageSizes.map((pkg) => ({
           ...pkg,
           price: Number.parseFloat(pkg.price),
           stock: Number.parseInt(pkg.stock),
         })),
+        // Add default image if none provided
+        images: [{ url: "/placeholder.svg", alt: values.name }],
       }
+
+      console.log("Submitting product data:", productData)
 
       // Call API to create product
       const response = await createProduct(productData)
+
+      console.log("API response:", response)
 
       if (response.success) {
         toast({
@@ -132,7 +151,10 @@ export default function AddProduct(): JSX.Element {
           description: "Your product has been added successfully.",
         })
 
-        router.push("/sell/dashboard")
+        // Redirect after a short delay to ensure the toast is seen
+        setTimeout(() => {
+          router.push("/sell/dashboard")
+        }, 1500)
       } else {
         throw new Error(response.error || "Failed to add product")
       }

@@ -8,7 +8,10 @@ import Product from "./models/product.model.js"
 dotenv.config()
 
 // Connect to DB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error("MongoDB Connection Error:", err))
 
 // Sample data
 const users = [
@@ -119,8 +122,12 @@ const importData = async () => {
     await Category.deleteMany()
     await Product.deleteMany()
 
+    console.log("Existing data cleared")
+
     // Create users
     const createdUsers = await User.create(users)
+    console.log(`${createdUsers.length} users created`)
+
     const adminUser = createdUsers[0]._id
     const sellerUser1 = createdUsers[1]._id
     const sellerUser2 = createdUsers[2]._id
@@ -128,6 +135,7 @@ const importData = async () => {
 
     // Create categories
     const createdCategories = await Category.create(categories)
+    console.log(`${createdCategories.length} categories created`)
 
     // Get category IDs
     const seedsCategory = createdCategories.find((c) => c.name === "Seeds & Plants")._id
@@ -569,12 +577,21 @@ const importData = async () => {
       },
     ]
 
-    await Product.create(products)
+    // Create products in chunks to avoid overwhelming the database
+    console.log(`Attempting to create ${products.length} products`)
 
-    console.log("Data Imported!")
-    process.exit()
+    // Create products in smaller batches
+    const batchSize = 5
+    for (let i = 0; i < products.length; i += batchSize) {
+      const batch = products.slice(i, i + batchSize)
+      await Product.create(batch)
+      console.log(`Created products ${i + 1} to ${Math.min(i + batchSize, products.length)}`)
+    }
+
+    console.log("Data Import Complete!")
+    process.exit(0)
   } catch (err) {
-    console.error(err)
+    console.error("Error during import:", err)
     process.exit(1)
   }
 }
@@ -587,9 +604,9 @@ const destroyData = async () => {
     await Product.deleteMany()
 
     console.log("Data Destroyed!")
-    process.exit()
+    process.exit(0)
   } catch (err) {
-    console.error(err)
+    console.error("Error during data destruction:", err)
     process.exit(1)
   }
 }

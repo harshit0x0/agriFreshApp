@@ -109,7 +109,16 @@ export const createProduct = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`User with role ${req.user.role} is not authorized to create a product`, 403))
   }
 
+  // Add default image if none provided
+  if (!req.body.images || req.body.images.length === 0) {
+    req.body.images = [{ url: "/placeholder.svg", alt: req.body.name || "Product Image" }]
+  }
+
+  // Create the product
   const product = await Product.create(req.body)
+
+  // Log the created product for debugging
+  console.log("Product created:", product)
 
   res.status(201).json({
     success: true,
@@ -224,5 +233,25 @@ export const getRelatedProducts = asyncHandler(async (req, res, next) => {
     success: true,
     count: relatedProducts.length,
     data: relatedProducts,
+  })
+})
+
+// @desc    Get seller products
+// @route   GET /api/products/seller
+// @access  Private (Seller)
+export const getSellerProducts = asyncHandler(async (req, res, next) => {
+  // Check if user is seller or admin
+  if (req.user.role !== "seller" && req.user.role !== "admin") {
+    return next(new ErrorResponse(`User with role ${req.user.role} is not authorized to view seller products`, 403))
+  }
+
+  const products = await Product.find({ seller: req.user._id })
+    .populate("category", "name slug")
+    .sort({ createdAt: -1 })
+
+  res.status(200).json({
+    success: true,
+    count: products.length,
+    data: products,
   })
 })
